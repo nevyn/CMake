@@ -502,6 +502,7 @@ function(add_jar _TARGET_NAME)
         ${CMAKE_JAVA_LIBRARY_OUTPUT_PATH}
     )
 
+    set(CMAKE_JAVA_INCLUDE_PATH_FINAL "foo")
     foreach (JAVA_INCLUDE_DIR IN LISTS CMAKE_JAVA_INCLUDE_PATH)
        string(APPEND CMAKE_JAVA_INCLUDE_PATH_FINAL "${_UseJava_PATH_SEP}${JAVA_INCLUDE_DIR}")
     endforeach()
@@ -619,7 +620,7 @@ function(add_jar _TARGET_NAME)
                 -P ${CMAKE_CURRENT_FUNCTION_LIST_DIR}/UseJava/ClearClassFiles.cmake
             COMMAND ${Java_JAVAC_EXECUTABLE}
                 ${CMAKE_JAVA_COMPILE_FLAGS}
-                -classpath "${CMAKE_JAVA_INCLUDE_PATH_FINAL}"
+                -classpath \"${CMAKE_JAVA_INCLUDE_PATH_FINAL}\"
                 -d ${CMAKE_JAVA_CLASS_OUTPUT_PATH}
                 ${_GENERATE_NATIVE_HEADERS}
                 ${_JAVA_SOURCES_FILELISTS}
